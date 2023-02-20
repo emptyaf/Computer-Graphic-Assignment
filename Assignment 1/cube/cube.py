@@ -1,26 +1,63 @@
-from kstn2021.libs.shader import *
-from kstn2021.libs import transform as T
-from kstn2021.libs.buffer import *
+import numpy as np
+
+from libs.shader import *
+from libs import transform as T
+from libs.buffer import *
 import ctypes
 import glfw
 
 
 class Cube(object):
     def __init__(self, vert_shader, frag_shader):
-        self.vertices = np.array(
-            # YOUR CODE HERE to specify vertex's coordinates
-        )
+        # self.vertices = np.array(
+        #     # YOUR CODE HERE to specify vertex's coordinates
+        # )
+        #
+        # self.indices = np.array(
+        #     # YOUR CODE HERE to specify index data
+        # )
+        #
+        # self.normals = # YOUR CODE HERE to compute vertex's normal using the coordinates
+        #
+        # # colors: RGB format
+        # self.colors = np.array(
+        #     # YOUR CODE HERE to specify vertex's color
+        # )
 
-        self.indices = np.array(
-            # YOUR CODE HERE to specify index data
-        )
+        self.vertices = np.array([
+            [-0.5, -0.5, 0.5],
+            [0.5, -0.5, 0.5],
+            [0.5, 0.5, 0.5],
+            [-0.5, 0.5, 0.5],
 
-        self.normals = # YOUR CODE HERE to compute vertex's normal using the coordinates
+            [-0.5, -0.5, -0.5],
+            [0.5, -0.5, -0.5],
+            [0.5, 0.5, -0.5],
+            [-0.5, 0.5, -0.5]
+        ], dtype=np.float32)
 
-        # colors: RGB format
-        self.colors = np.array(
-            # YOUR CODE HERE to specify vertex's color
-        )
+        # random normals (facing +z)
+        normals = np.random.normal(0, 7, (self.vertices.shape[0], 6)).astype(np.float32)
+        normals[:, 3] = np.abs(normals[:, 3])  # (facing +z)
+        normals = normals / np.linalg.norm(normals, axis=1, keepdims=True)
+        print(normals)
+
+        # indices
+        self.indices = np.array([0, 1, 2, 2, 3, 0, 0, 4,
+           4, 5, 6, 6, 7, 4, 4, 4,
+           4, 5, 1, 1, 0, 4, 4, 6,
+           6, 7, 3, 3, 2, 6, 6, 5,
+           5, 6, 2, 2, 1, 5, 5, 7,
+           7, 4, 0, 0, 3, 7])  #np.arange(self.vertex_attrib.shape[0]).astype(np.int32)
+
+        self.colors = np.array([
+            [1.0, 0.0, 0.0],
+            [0.0, 1.0, 0.0],
+            [0.0, 0.0, 1.0],
+            [0.5, 0.0, 0.0],
+            [0.0, 0.5, 0.0],
+            [0.0, 0.0, 0.5]
+        ], dtype=np.float32)
 
         self.vao = VAO()
 

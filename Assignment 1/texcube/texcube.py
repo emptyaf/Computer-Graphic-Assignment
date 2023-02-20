@@ -62,22 +62,53 @@ class TexCube(object):
         self.vertices = np.array(
             [
                 # YOUR CODE HERE to specify vertices' coordinates
+                [-0.5, -0.5, 0.5],
+                [0.5, -0.5, 0.5],
+                [0.5, 0.5, 0.5],
+                [-0.5, 0.5, 0.5],
+
+                [-0.5, -0.5, -0.5],
+                [0.5, -0.5, -0.5],
+                [0.5, 0.5, -0.5],
+                [-0.5, 0.5, -0.5],
+
             ],
             dtype=np.float32
         )
 
         # concatenate three sequences of triangle strip: [0 - 9] [10 - 13] [14-17]
         # => repeat 9, 10, 13, 14
-        self.indices = np.array(
+        self.indices = np.array([
             # YOUR CODE HERE to specify indices
+            # 0, 1, 2, 2, 3, 0, 0, 4,
+            # 4, 5, 6, 6, 7, 4, 4, 8,
+            # 8, 9, 10, 10, 11, 8, 8, 12,
+            # 12, 13, 14, 14, 15, 12, 12, 16,
+            # 16, 17, 18, 18, 19, 16, 16, 20,
+            # 20, 21, 22, 22, 23, 20]
+
+            0, 1, 2, 2, 3, 0, 0, 4,
+            4, 5, 6, 6, 7, 4, 4, 4,
+            4, 5, 1, 1, 0, 4, 4, 6,
+            6, 7, 3, 3, 2, 6, 6, 5,
+            5, 6, 2, 2, 1, 5, 5, 7,
+            7, 4, 0, 0, 3, 7]
         )
 
-        self.normals = # YOUR CODE HERE to compute vertices' normals using the coordinates
+        # YOUR CODE HERE to compute vertices' normals using the coordinates
+        self.normals = normals = np.random.normal(0, 5, (self.vertices.shape[0], 3)).astype(np.float32)
+        normals[:, 2] = np.abs(normals[:, 2])  # (facing +z)
+        normals = normals / np.linalg.norm(normals, axis=1, keepdims=True)
 
         # texture coordinates
         self.texcoords = np.array(
             [
                 # YOUR CODE HERE to specify vertices' texture coordinates
+                [-0.5, -0.5, 0.5],
+                [0.5, 0.5, 0.5],
+                [0.5, -0.5, 0.5],
+
+
             ],
             dtype=np.float32
         )
@@ -85,6 +116,17 @@ class TexCube(object):
         self.colors = np.array(
             [
                 # YOUR CODE HERE to specify vertices' color
+                [0.5, 0.5, 0.5],
+                [0.25, 0.25, 0.25],
+                [0.5, 0.5, 0.5],
+                [0.25, 0.25, 0.25],
+
+                [0.25, 0.25, 0.25],
+                [0.5, 0.5, 0.5],
+                [0.25, 0.25, 0.25],
+                [0.5, 0.5, 0.5],
+
+
             ],
             dtype=np.float32
         )

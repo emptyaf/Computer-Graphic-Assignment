@@ -2,7 +2,7 @@ import OpenGL.GL as GL              # standard Python OpenGL wrapper
 import glfw                         # lean windows system wrapper for OpenGL
 import numpy as np                  # all matrix manipulations & OpenGL args
 from itertools import cycle   # cyclic iterator to easily toggle polygon rendering modes
-from kstn2021.libs.transform import Trackball
+from libs.transform import Trackball
 from texcube import *
 # ------------  Viewer class & windows management ------------------------------
 class Viewer:
