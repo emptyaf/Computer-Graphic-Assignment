@@ -104,10 +104,20 @@ class TexCube(object):
         self.texcoords = np.array(
             [
                 # YOUR CODE HERE to specify vertices' texture coordinates
-                [-0.5, -0.5, 0.5],
-                [0.5, 0.5, 0.5],
-                [0.5, -0.5, 0.5],
+                # [0, -0.5, 0.5],
+                # [0.5, 0, 0.5],
+                # [0, 0.5, 0.5],
+                # [-0.5, 0, 0.5],
 
+                [-0.5, -0.5, 0.5],
+                [0., -0.5, 0.5],
+                # [0.5, 0.5, 0.5],
+                # [-0.25, 0.25, 0.25],
+                #
+                # [-0.5, -0.5, -0.5],
+                # [0.5, -0.5, -0.5],
+                # [0.5, 0.5, -0.5],
+                # [-0.5, 0.5, -0.5],
 
             ],
             dtype=np.float32
@@ -116,15 +126,14 @@ class TexCube(object):
         self.colors = np.array(
             [
                 # YOUR CODE HERE to specify vertices' color
-                [0.5, 0.5, 0.5],
-                [0.25, 0.25, 0.25],
-                [0.5, 0.5, 0.5],
-                [0.25, 0.25, 0.25],
-
-                [0.25, 0.25, 0.25],
-                [0.5, 0.5, 0.5],
-                [0.25, 0.25, 0.25],
-                [0.5, 0.5, 0.5],
+                [0.0, 0.0, 0.0],  # black
+                [1.0, 0.0, 0.0],  # red
+                [1.0, 1.0, 0.0],  # yellow
+                [0.0, 1.0, 0.0],  # green
+                [0.0, 0.0, 1.0],  # blue
+                [1.0, 0.0, 1.0],  # magenta
+                [1.0, 1.0, 1.0],  # white
+                [0.0, 1.0, 1.0]  # cyan
 
 
             ],
@@ -145,7 +154,7 @@ class TexCube(object):
         self.vao.add_vbo(0, self.vertices, ncomponents=3, stride=0, offset=None)
         self.vao.add_vbo(1, self.normals, ncomponents=3, stride=0, offset=None)
         self.vao.add_vbo(2, self.texcoords, ncomponents=2, stride=0, offset=None)
-        self.vao.add_vbo(3, self.normals, ncomponents=3, stride=0, offset=None)
+        self.vao.add_vbo(3, self.colors, ncomponents=3, stride=0, offset=None)
 
         # setup EBO for drawing cylinder's side, bottom and top
         self.vao.add_ebo(self.indices)
