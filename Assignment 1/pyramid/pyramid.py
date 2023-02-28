@@ -7,7 +7,7 @@ import ctypes
 import glfw
 
 
-class Cube(object):
+class Pyramid(object):
     def __init__(self, vert_shader, frag_shader):
         # self.vertices = np.array(
         #     # YOUR CODE HERE to specify vertex's coordinates
@@ -29,11 +29,7 @@ class Cube(object):
             [0.5, -0.5, 0.5],
             [0.5, 0.5, 0.5],
             [-0.5, 0.5, 0.5],
-
-            [-0.5, -0.5, -0.5],
-            [0.5, -0.5, -0.5],
-            [0.5, 0.5, -0.5],
-            [-0.5, 0.5, -0.5]
+            [0, 0, 1],
         ], dtype=np.float32)
 
         # random normals (facing +z)
@@ -44,13 +40,11 @@ class Cube(object):
 
         # indices
         self.indices = np.array(
-          [0, 1, 2, 2, 3, 0, 0, 4,
-           4, 5, 6, 6, 7, 4, 4, 4,
-           4, 5, 1, 1, 0, 4, 4, 6,
-           6, 7, 3, 3, 2, 6, 6, 5,
-           5, 6, 2, 2, 1, 5, 5, 7,
-           7, 4, 0, 0, 3, 7])
-            #np.arange(self.vertex_attrib.shape[0]).astype(np.int32)
+            [0, 1, 2, 2, 3, 0, 0, 4,
+             4, 0, 1, 1, 4,
+             4, 1, 2, 2, 4,
+             4, 2, 3, 3, 4,
+             4, 3, 0])  #np.arange(self.vertex_attrib.shape[0]).astype(np.int32)
 
         self.colors = np.array([
 
